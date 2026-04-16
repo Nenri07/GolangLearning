@@ -1,3 +1,4 @@
+Golang Series with Hitesh Chaudry
 1. download the golang and save the path in env veriables of window
 2. fmt.Println(”something”) for print
 3. golang auto import the stuff.
