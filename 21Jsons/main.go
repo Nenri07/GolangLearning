@@ -7,7 +7,8 @@ import (
 
 func main() {
 	fmt.Println("this is json class")
-	coursesJson()
+	// coursesJson()
+	decodeJson()
 }
 
 type course struct {
@@ -37,4 +38,40 @@ func CheckNillError(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func decodeJson() {
+	bytejson := []byte(`
+		{
+                "coursename": "Japnease",
+                "coursePrice": 24,
+                "tagsofcourse": ["jlpt","nihongo"],
+                "tutorName": "nenreisensei"
+        }
+	`)
+
+	var courseJson course
+
+	isValid := json.Valid(bytejson)
+	if isValid {
+		fmt.Println("this is valid json")
+		json.Unmarshal(bytejson, &courseJson)
+		fmt.Printf("this is json used%#v\n", courseJson)
+	} else {
+		fmt.Println("Json Invalid")
+	}
+
+	var keyJson map[string]any
+	json.Unmarshal(bytejson, &keyJson)
+	fmt.Println("this is valid map json")
+	fmt.Printf("this is %#v\n", keyJson)
+
+	for key, value := range keyJson {
+		fmt.Printf("This is key %v and this is value %v and type is %T\n", key, value, value)
+	}
+
+}
+
+type Abser interface {
+	Abs() float64
 }
